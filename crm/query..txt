@@ -1,0 +1,44 @@
+from django.db import models
+
+# Create your models here>>
+class Employees(models.Model):
+    name=models.CharField(max_length=200)
+    department=models.CharField(max_length=200)
+    salary=models.PositiveIntegerField()
+    email=models.EmailField(unique=True  )
+    age=models.PositiveIntegerField()
+    contact=models.CharField(null=True, max_length=200)
+
+orm query for Create new object>>
+>>> Employees.objects.create(name="hari",department="hr",salary=67000,email="hari@gmail.com",age=30,contact="test")
+>>> Employees.objects.create(name="jumi",department="hr",salary=12000,email="jum@gmail.com",age=23,contact="234567890")  
+>>> Employees.objects.create(name="sha",department="it",salary=87000,email="sha@gmail.com",age=30,contact="345568797")   
+>>> Employees.objects.create(name="shibi",department="hr",salary=567000,email="shibi@gmail.com",age=18,contact="3456784")          
+
+orm query for feching al arguments>>
+>>> qs=Employees.objects.all()
+>>> qs=Employees.objects.get(id=1)
+
+orm query for filtering Employees records>>
+>>> qs=Employees.objects.filter(department="hr")
+>>> qs=Employees.objects.filter(salary__gte=50000)
+>>> qs=Employees.objects.filter(salary__lte=50000)
+
+
+__gte=greaterthan or =   (>=)
+__lte=lessthan or =    (<=)
+__gt=>
+__lt=<
+
+
+
+orm query for excluding object>>
+>>exclude
+qs=Employees.objects.filter(department.exclude="hr")
+
+
+delete query
+Employees.objects.filter(id=1).delete()
+
+ascending order:
+Employees.objects.all().order_by("salary")
